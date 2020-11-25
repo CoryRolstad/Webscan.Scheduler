@@ -1,12 +1,17 @@
+using Confluent.Kafka;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Webscan.Scheduler.Helpers;
 using Webscan.Scheduler.Models;
 using Webscan.Scheduler.Models.Repository;
+using Webscan.Scheduler.Services;
 
 namespace Webscan.Scheduler
 {
@@ -14,11 +19,25 @@ namespace Webscan.Scheduler
     {
         private readonly ILogger<Worker> _logger;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IConfiguration _config;
+        private readonly KafkaDependentProducer<Null, string> _producer;
 
-        public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider)
+        public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, IConfiguration config, KafkaDependentProducer<Null, string> producer)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException($"{nameof(serviceProvider)} cannot be null");
-            _logger = logger;
+            _config = config ?? throw new ArgumentNullException($"{nameof(config)} cannot be null");
+            _logger = logger ?? throw new ArgumentNullException($"{nameof(logger)} cannot be null");
+            _producer = producer ?? throw new ArgumentNullException($"{nameof(producer)} cannot be null");
+        }
+
+        public IEnumerable<StatusCheck> GetStatusChecks()
+        {
+            using (IServiceScope scope = _serviceProvider.CreateScope())
+            {
+                _logger.LogInformation($"{DateTime.Now}: Retreiving StatusChecks From Database");
+                IStatusCheckRepository<StatusCheck> statusCheckRepository = scope.ServiceProvider.GetRequiredService<IStatusCheckRepository<StatusCheck>>();
+                return statusCheckRepository.GetAll();
+            }
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -30,15 +49,21 @@ namespace Webscan.Scheduler
 
             try
             {
+                IEnumerable<StatusCheck> statusChecks = GetStatusChecks();
+
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    using (IServiceScope scope = _serviceProvider.CreateScope())
+                    List<Task> taskList = new List<Task>();
+
+                    foreach(StatusCheck statusCheck in statusChecks)
                     {
-                        IStatusCheckRepository<StatusCheck> statusCheckRepository = scope.ServiceProvider.GetRequiredService<IStatusCheckRepository<StatusCheck>>();
-                        IEnumerable<StatusCheck> statusChecks = statusCheckRepository.GetAll();
-                        _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                        await Task.Delay(1000, stoppingToken);
+                        _logger.LogInformation("Creating Insatnce of Scheduled Task");
+                        ScheduledStatusCheckProducer scheduledTask = new ScheduledStatusCheckProducer(TimeZoneInfo.Local, statusCheck);
+                        taskList.Add(scheduledTask.ScheduleJob(stoppingToken));
                     }
+
+                    _logger.LogInformation("Main Thread Waiting");
+                    await Task.Delay(-1, stoppingToken);
                 }
             }
             catch (OperationCanceledException e)
@@ -57,6 +82,8 @@ namespace Webscan.Scheduler
                 //_hostApplicationLifetime.StopApplication(); //Should we shutdown the app or alert somehow?
             }
         }
+
+
 
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webscan.Scheduler.datastore;
 
 namespace Webscan.Scheduler.Migrations
 {
     [DbContext(typeof(WebscanContext))]
-    partial class WebscanContextModelSnapshot : ModelSnapshot
+    [Migration("20201125211100_CronJobTimingAddToStatusCheck3")]
+    partial class CronJobTimingAddToStatusCheck3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,6 @@ namespace Webscan.Scheduler.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CronExpression")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QueryTimeInSeconds")

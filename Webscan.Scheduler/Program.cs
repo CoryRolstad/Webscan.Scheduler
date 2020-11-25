@@ -7,6 +7,7 @@ using Webscan.Scheduler.Models.Repository;
 using Webscan.Scheduler.Models;
 using Webscan.Scheduler.Helpers;
 using Webscan.Scheduler.Services;
+using Confluent.Kafka;
 
 namespace Webscan.Scheduler
 {
@@ -29,14 +30,17 @@ namespace Webscan.Scheduler
                     services.AddScoped<IStatusCheckRepository<StatusCheck>, StatusCheckRepository>();
                     services.AddScoped<IUserRepository<User>, UserRepository>();
 
-                    //services.AddHostedService<Worker>();
+                    services.AddSingleton<KafkaClientHandle>();
+                    services.AddSingleton<KafkaDependentProducer<Null, string>>();
+
+                    services.AddHostedService<Worker>();
 
                     // register CronJobs below
-                    services.AddCronJob<StatusCheckCronJob>(c =>
-                    {
-                        c.TimeZoneInfo = System.TimeZoneInfo.Local;
-                        c.CronExpression = @"* * * * *";
-                    });
+                    //services.AddCronJob<StatusCheckCronJob>(c =>
+                    //{
+                    //    c.TimeZoneInfo = System.TimeZoneInfo.Local;
+                    //    c.CronExpression = @"* * * * *";
+                    //});
                 });
     }
 }
