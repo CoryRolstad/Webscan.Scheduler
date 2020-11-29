@@ -20,14 +20,12 @@ namespace Webscan.Scheduler
         private readonly ILogger<Worker> _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly IConfiguration _config;
-        private readonly KafkaDependentProducer<Null, string> _producer;
 
-        public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, IConfiguration config, KafkaDependentProducer<Null, string> producer)
+        public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, IConfiguration config)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException($"{nameof(serviceProvider)} cannot be null");
             _config = config ?? throw new ArgumentNullException($"{nameof(config)} cannot be null");
             _logger = logger ?? throw new ArgumentNullException($"{nameof(logger)} cannot be null");
-            _producer = producer ?? throw new ArgumentNullException($"{nameof(producer)} cannot be null");
         }
 
         public IEnumerable<StatusCheck> GetStatusChecks()
@@ -49,6 +47,7 @@ namespace Webscan.Scheduler
 
             try
             {
+
                 IEnumerable<StatusCheck> statusChecks = GetStatusChecks();
 
                 while (!stoppingToken.IsCancellationRequested)
@@ -57,8 +56,8 @@ namespace Webscan.Scheduler
 
                     foreach(StatusCheck statusCheck in statusChecks)
                     {
-                        _logger.LogInformation("Creating Insatnce of Scheduled Task");
-                        ScheduledStatusCheckProducer scheduledTask = new ScheduledStatusCheckProducer(TimeZoneInfo.Local, statusCheck);
+                        _logger.LogInformation($"Creating {statusCheck.Name} Instance of Scheduled Task");
+                        ScheduledStatusCheckProducer scheduledTask = new ScheduledStatusCheckProducer(TimeZoneInfo.Local, statusCheck, _serviceProvider);
                         taskList.Add(scheduledTask.ScheduleJob(stoppingToken));
                     }
 

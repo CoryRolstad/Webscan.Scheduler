@@ -1,8 +1,13 @@
-﻿using Cronos;
+﻿using Confluent.Kafka;
+using Cronos;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Webscan.Scheduler.Models;
+using Webscan.Scheduler.Models.Repository;
 
 namespace Webscan.Scheduler.Services
 {
@@ -12,12 +17,14 @@ namespace Webscan.Scheduler.Services
         private readonly CronExpression _expression;
         private readonly TimeZoneInfo _timeZoneInfo;
         private readonly StatusCheck _statusCheck;
+        private readonly IServiceProvider _serviceProvider; 
 
-        public ScheduledStatusCheckProducer(TimeZoneInfo timeZoneInfo, StatusCheck statusCheck)
+        public ScheduledStatusCheckProducer(TimeZoneInfo timeZoneInfo, StatusCheck statusCheck, IServiceProvider serviceProvider)
         {
             _statusCheck = statusCheck ?? throw new ArgumentNullException($"{nameof(statusCheck)} cannot be null");
             if(!string.IsNullOrEmpty(statusCheck.CronExpression)) _expression = CronExpression.Parse(statusCheck.CronExpression);
             _timeZoneInfo = timeZoneInfo ?? throw new ArgumentNullException($"{nameof(TimeZoneInfo)} cannot be null");
+            _serviceProvider = serviceProvider ?? throw new ArgumentNullException($"{nameof(_serviceProvider)} cannot be null");
         }
 
         public async Task ScheduleJob(CancellationToken cancellationToken)
@@ -62,7 +69,29 @@ namespace Webscan.Scheduler.Services
 
         public virtual async Task DoWork(CancellationToken cancellationToken)
         {
-            Console.WriteLine($"{_statusCheck.Name}:\n\tURL:{_statusCheck.Url}");
+            var conf = new ProducerConfig
+            {
+                BootstrapServers = "10.0.0.94:9092",
+                ClientId = _statusCheck.Name
+            };
+
+            using (IServiceScope scope = _serviceProvider.CreateScope())
+            {
+                ILogger<Worker> _logger = scope.ServiceProvider.GetRequiredService<ILogger<Worker>>();
+                _logger.LogInformation($"{_statusCheck.Name} Added to Scheduler Queue(Topic: StatusCheck):\n\tURL:{_statusCheck.Url}");
+
+                using (var p = new ProducerBuilder<Null, string>(conf).Build())
+                {
+                    var response = await p.ProduceAsync("StatusCheck", new Message<Null, string> { Value = JsonConvert.SerializeObject(_statusCheck, Formatting.Indented) })
+                        .ContinueWith(task => task.IsFaulted
+                                ? $"error producing message: {task.Exception.Message}"
+                                : $"produced to: {task.Result.TopicPartitionOffset}");
+
+                    // wait for up to 10 seconds for any inflight messages to be delivered.
+                    p.Flush(TimeSpan.FromSeconds(10));
+                }
+            }
+
         }
 
         public virtual void Dispose()
