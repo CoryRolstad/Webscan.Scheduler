@@ -32,7 +32,7 @@ namespace Webscan.Scheduler
         {
             using (IServiceScope scope = _serviceProvider.CreateScope())
             {
-                _logger.LogInformation($"{DateTime.Now}: Retreiving StatusChecks From Database");
+                _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: Retreiving StatusChecks From Database");
                 IStatusCheckRepository<StatusCheck> statusCheckRepository = scope.ServiceProvider.GetRequiredService<IStatusCheckRepository<StatusCheck>>();
                 return statusCheckRepository.GetAll();
             }
@@ -42,7 +42,7 @@ namespace Webscan.Scheduler
         {
             stoppingToken.Register(() =>
             {
-                _logger.LogInformation("TaskProcessingService shutting down");
+                _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: TaskProcessingService shutting down");
             });
 
             try
@@ -56,12 +56,12 @@ namespace Webscan.Scheduler
 
                     foreach(StatusCheck statusCheck in statusChecks)
                     {
-                        _logger.LogInformation($"Creating {statusCheck.Name} Instance of Scheduled Task");
+                        _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: Creating {statusCheck.Name} Instance of Scheduled Task");
                         ScheduledStatusCheckProducer scheduledTask = new ScheduledStatusCheckProducer(TimeZoneInfo.Local, statusCheck, _serviceProvider);
                         taskList.Add(scheduledTask.ScheduleJob(stoppingToken));
                     }
 
-                    _logger.LogInformation("Main Thread Waiting");
+                    _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: Main Thread Waiting");
                     await Task.Delay(-1, stoppingToken);
                 }
             }

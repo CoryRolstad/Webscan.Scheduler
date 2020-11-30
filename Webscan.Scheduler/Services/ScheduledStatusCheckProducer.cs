@@ -78,7 +78,7 @@ namespace Webscan.Scheduler.Services
             using (IServiceScope scope = _serviceProvider.CreateScope())
             {
                 ILogger<Worker> _logger = scope.ServiceProvider.GetRequiredService<ILogger<Worker>>();
-                _logger.LogInformation($"{_statusCheck.Name} Added to Scheduler Queue(Topic: StatusCheck):\n\tURL:{_statusCheck.Url}");
+                _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: {_statusCheck.Name} Added to Scheduler Queue(Topic: StatusCheck):\n\tURL:{_statusCheck.Url}");
 
                 using (var p = new ProducerBuilder<Null, string>(conf).Build())
                 {
