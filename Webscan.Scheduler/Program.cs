@@ -24,6 +24,8 @@ namespace Webscan.Scheduler
                     services.AddDbContext<WebscanContext>(options =>
                         options.UseSqlServer(configuration.GetConnectionString("Webscan")));
 
+                    services.Configure<KafkaSettings>(configuration.GetSection("KafkaSettings"));
+
                     services.AddScoped<IStatusCheckRepository<StatusCheck>, StatusCheckRepository>();
                     services.AddScoped<IUserRepository<User>, UserRepository>();
 

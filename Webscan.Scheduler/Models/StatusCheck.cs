@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Webscan.Scheduler.Models
@@ -16,6 +18,8 @@ namespace Webscan.Scheduler.Models
         public string CronExpression { get; set; }
         // Or can have QueryTimeInSeconds (will query every X seconds)
         public int QueryTimeInSeconds { get; set; }
-
+        // Last Time the users were notified (for notification cool down, so we aren't spamming users)
+        public DateTime LastNotified { get; set; }
+        public ICollection<User> Users { get; } = new List<User>();
     }
 }

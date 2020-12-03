@@ -2,6 +2,7 @@
 using Cronos;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
@@ -69,20 +70,23 @@ namespace Webscan.Scheduler.Services
 
         public virtual async Task DoWork(CancellationToken cancellationToken)
         {
-            var conf = new ProducerConfig
-            {
-                BootstrapServers = "10.0.0.94:9092",
-                ClientId = _statusCheck.Name
-            };
 
             using (IServiceScope scope = _serviceProvider.CreateScope())
             {
                 ILogger<Worker> _logger = scope.ServiceProvider.GetRequiredService<ILogger<Worker>>();
                 _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: {_statusCheck.Name} Added to Scheduler Queue(Topic: StatusCheck):\n\tURL:{_statusCheck.Url}");
 
+                IOptions<KafkaSettings> kafkaSettings = scope.ServiceProvider.GetRequiredService<IOptions<KafkaSettings>>();
+
+                var conf = new ProducerConfig
+                {
+                    BootstrapServers = kafkaSettings.Value.Broker,
+                    ClientId = _statusCheck.Name
+                };
+
                 using (var p = new ProducerBuilder<Null, string>(conf).Build())
                 {
-                    var response = await p.ProduceAsync("StatusCheck", new Message<Null, string> { Value = JsonConvert.SerializeObject(_statusCheck, Formatting.Indented) })
+                    var response = await p.ProduceAsync(kafkaSettings.Value.SchedulerTopicName, new Message<Null, string> { Value = JsonConvert.SerializeObject(_statusCheck, Formatting.Indented) })
                         .ContinueWith(task => task.IsFaulted
                                 ? $"error producing message: {task.Exception.Message}"
                                 : $"produced to: {task.Result.TopicPartitionOffset}");

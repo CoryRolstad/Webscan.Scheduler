@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,11 @@ namespace Webscan.Scheduler.Models.Repository
             dbEntity.Url = entity.Url;
             dbEntity.XPath = entity.XPath;
             dbEntity.XPathContentFailureString = entity.XPathContentFailureString;
+
+            foreach(User user in dbEntity.Users)
+            {
+                dbEntity.Users.Add(user);
+            }
 
             _webscanContext.SaveChanges(); 
         }
