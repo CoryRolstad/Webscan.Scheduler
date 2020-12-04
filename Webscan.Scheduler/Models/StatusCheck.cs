@@ -20,6 +20,8 @@ namespace Webscan.Scheduler.Models
         public int QueryTimeInSeconds { get; set; }
         // Last Time the users were notified (for notification cool down, so we aren't spamming users)
         public DateTime LastNotified { get; set; }
+        // Either its enabled or disabled.
+        public bool Enabled { get; set; }
         public ICollection<User> Users { get; } = new List<User>();
     }
 }

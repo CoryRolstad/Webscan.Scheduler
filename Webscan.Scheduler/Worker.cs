@@ -34,7 +34,7 @@ namespace Webscan.Scheduler
             {
                 _logger.LogInformation($"{DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff")}: Retreiving StatusChecks From Database");
                 IStatusCheckRepository<StatusCheck> statusCheckRepository = scope.ServiceProvider.GetRequiredService<IStatusCheckRepository<StatusCheck>>();
-                return statusCheckRepository.GetAll();
+                return statusCheckRepository.GetAll().Where(x => x.Enabled == true).ToList();
             }
         }
 
