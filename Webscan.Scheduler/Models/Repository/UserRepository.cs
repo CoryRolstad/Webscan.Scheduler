@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Webscan.Scheduler.datastore;
 
 namespace Webscan.Scheduler.Models.Repository
@@ -29,24 +26,18 @@ namespace Webscan.Scheduler.Models.Repository
 
         public User Get(int id)
         {
-            return _webscanContext.Users.Include(x => x.StatusChecks).FirstOrDefault(x => x.Id == id);
+            return _webscanContext.Users.FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _webscanContext.Users.Include( x => x.StatusChecks).ToList();
+            return _webscanContext.Users.ToList();
         }
 
         public void Update(User dbEntity, User entity)
         {
             dbEntity.Username = entity.Username;
-            dbEntity.email = entity.email;
-
-            dbEntity.StatusChecks.Clear();
-            foreach (var statusCheck in entity.StatusChecks)
-            {
-                dbEntity.StatusChecks.Add(statusCheck);
-            }
+            dbEntity.Email = entity.Email;
 
             _webscanContext.SaveChanges();
         }

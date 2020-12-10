@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Webscan.Scheduler.datastore;
 
 namespace Webscan.Scheduler.Models.Repository
@@ -34,7 +31,7 @@ namespace Webscan.Scheduler.Models.Repository
         }
 
         public IEnumerable<StatusCheck> GetAll()
-        {
+        {           
             return _webscanContext.StatusChecks.ToList(); 
         }
 
@@ -44,12 +41,7 @@ namespace Webscan.Scheduler.Models.Repository
             dbEntity.XPath = entity.XPath;
             dbEntity.XPathContentFailureString = entity.XPathContentFailureString;
 
-            foreach(User user in dbEntity.Users)
-            {
-                dbEntity.Users.Add(user);
-            }
-
-            _webscanContext.SaveChanges(); 
+            _webscanContext.SaveChanges();
         }
     }
 }

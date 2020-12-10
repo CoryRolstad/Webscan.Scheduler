@@ -29,6 +29,13 @@ namespace Webscan.Scheduler
                     services.AddScoped<IStatusCheckRepository<StatusCheck>, StatusCheckRepository>();
                     services.AddScoped<IUserRepository<User>, UserRepository>();
 
+                    // Ensure database is built and populated
+                    using (WebscanContext webscanContext = services.BuildServiceProvider().GetService<WebscanContext>())
+                    {
+                        webscanContext.Database.EnsureDeleted(); 
+                        webscanContext.Database.Migrate();
+                    }
+
                     services.AddHostedService<Worker>();
 
                 });

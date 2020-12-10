@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +10,7 @@ namespace Webscan.Scheduler.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Username { get; set; }
-        public string email { get; set; }
-        public ICollection<StatusCheck> StatusChecks { get; } = new List<StatusCheck>();
+        public string Email { get; set; }
+        public List<StatusCheck> StatusChecks { get; } = new List<StatusCheck>();
     }
 }

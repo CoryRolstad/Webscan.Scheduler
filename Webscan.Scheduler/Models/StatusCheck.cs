@@ -22,6 +22,6 @@ namespace Webscan.Scheduler.Models
         public DateTime LastNotified { get; set; }
         // Either its enabled or disabled.
         public bool Enabled { get; set; }
-        public ICollection<User> Users { get; } = new List<User>();
+        public List<User> Users { get; set; }
     }
 }
