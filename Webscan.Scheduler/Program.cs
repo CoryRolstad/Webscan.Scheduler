@@ -29,11 +29,16 @@ namespace Webscan.Scheduler
                     services.AddScoped<IStatusCheckRepository<StatusCheck>, StatusCheckRepository>();
                     services.AddScoped<IUserRepository<User>, UserRepository>();
 
-                    // Ensure database is built and populated
-                    using (WebscanContext webscanContext = services.BuildServiceProvider().GetService<WebscanContext>())
+
+                    string useAutomigration = string.IsNullOrWhiteSpace(configuration.GetConnectionString("UseAutoMigration")) ? "false" : configuration.GetConnectionString("UseAutoMigration");
+                    if (useAutomigration == "true")
                     {
-                        webscanContext.Database.EnsureDeleted(); 
-                        webscanContext.Database.Migrate();
+                        // Ensure database is built and populated
+                        using (WebscanContext webscanContext = services.BuildServiceProvider().GetService<WebscanContext>())
+                        {
+                            webscanContext.Database.EnsureDeleted();
+                            webscanContext.Database.Migrate();
+                        }
                     }
 
                     services.AddHostedService<Worker>();
