@@ -10,8 +10,8 @@ using Webscan.Scheduler.datastore;
 namespace Webscan.Scheduler.Migrations
 {
     [DbContext(typeof(WebscanContext))]
-    [Migration("20201210185233_dbInit")]
-    partial class dbInit
+    [Migration("20201213165810_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace Webscan.Scheduler.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<string>("BitlyShortenedUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CronExpression")
                         .HasColumnType("nvarchar(max)");
@@ -60,8 +63,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 1,
+                            BitlyShortenedUrl = "https://bit.ly/3mcVrRa",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: EVGA 3080 FTW3",
                             QueryTimeInSeconds = 0,
@@ -72,8 +76,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 2,
+                            BitlyShortenedUrl = "https://bit.ly/3oOo2h8",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: AMD 5900x",
                             QueryTimeInSeconds = 0,
@@ -84,8 +89,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 3,
+                            BitlyShortenedUrl = "https://bit.ly/3440VHF",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: AMD 5600x",
                             QueryTimeInSeconds = 0,
@@ -96,10 +102,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 4,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/3njzaCC",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: EVGA 3080 XC3",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/evga-geforce-rtx-3080-10g-p5-3885-kr/p/N82E16814487520?Description=3080&cm_re=3080-_-14-487-520-_-Product&quicklink=true",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -107,10 +115,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 5,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/37g0awU",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: Asus 3080 TUF",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452?Description=3080&cm_re=3080-_-14-126-452-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -118,10 +128,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 6,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/3r0o9bF",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: Gigabyte 3080 Auros",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/gigabyte-geforce-rtx-3080-gv-n3080vision-oc-10gd/p/N82E16814932337?Description=3080&cm_re=3080-_-14-932-337-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -129,10 +141,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 7,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/2KiQU2n",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: PNY 3080",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/pny-geforce-rtx-3080-vcg308010tfxmpb/p/N82E16814133810?Description=3080&cm_re=3080-_-14-133-810-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Out of Stock "
@@ -140,10 +154,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 8,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/383V3iV",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: ASUS ROG 3080 Strix",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/asus-geforce-rtx-3080-rog-strix-rtx3080-o10g-gaming/p/N82E16814126457?Description=3080&cm_re=3080-_-14-126-457-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -151,10 +167,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 9,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/2W9eelw",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: AMD 5900x CPU",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/amd-ryzen-9-5900x/p/N82E16819113664?Description=5900x&cm_re=5900x-_-19-113-664-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -162,10 +180,12 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 10,
-                            Enabled = false,
+                            BitlyShortenedUrl = "https://bit.ly/2KiKLmO",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: AMD 5600x CPU",
-                            QueryTimeInSeconds = 30,
+                            QueryTimeInSeconds = 0,
                             Url = "https://www.newegg.com/amd-ryzen-5-5600x/p/N82E16819113666?Description=5600x&cm_re=5600x-_-19-113-666-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -173,8 +193,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 11,
+                            BitlyShortenedUrl = "https://bhpho.to/3oNIbnM",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5900x CPU",
                             QueryTimeInSeconds = 0,
@@ -185,8 +206,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 12,
+                            BitlyShortenedUrl = "https://bhpho.to/3gGKvtT",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5600x CPU",
                             QueryTimeInSeconds = 0,
@@ -197,8 +219,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 13,
+                            BitlyShortenedUrl = "https://bhpho.to/2KiKRuG",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5800x CPU",
                             QueryTimeInSeconds = 0,
@@ -209,8 +232,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 14,
+                            BitlyShortenedUrl = "https://bhpho.to/346hDpW",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: ASUS 3070 GPU",
                             QueryTimeInSeconds = 0,
@@ -221,8 +245,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 15,
+                            BitlyShortenedUrl = "https://bit.ly/3oLKnvU",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3080 FTW",
                             QueryTimeInSeconds = 0,
@@ -233,8 +258,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 16,
+                            BitlyShortenedUrl = "https://bit.ly/3r0orPN",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: ASUS TUF 3080",
                             QueryTimeInSeconds = 0,
@@ -245,8 +271,9 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 17,
+                            BitlyShortenedUrl = "https://bit.ly/3qURSCL",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3070 XC3",
                             QueryTimeInSeconds = 0,
@@ -257,14 +284,54 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 18,
+                            BitlyShortenedUrl = "",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "AMD.com: 5000 Series Processors",
                             QueryTimeInSeconds = 0,
                             Url = "https://www.amd.com/en/where-to-buy/ryzen-5000-series-processors",
                             XPath = "/html/body/div[1]/main/div/div/div/article/div/div[1]/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div/p/a",
                             XPathContentFailureString = "AMD.com - Out of Stock"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            BitlyShortenedUrl = "https://bit.ly/3oOW8lm",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
+                            LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BestBuy: 3080 FTW3",
+                            QueryTimeInSeconds = 0,
+                            Url = "https://www.bestbuy.com/site/evga-geforce-rtx-3080-ftw3-ultra-gaming-10gb-gddr6-pci-express-4-0-graphics-card/6436196.p?skuId=6436196",
+                            XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[6]/div[1]/div/div/div/button",
+                            XPathContentFailureString = "Sold Out"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            BitlyShortenedUrl = "https://bit.ly/34abicR",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
+                            LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BestBuy: 3080 XC3",
+                            QueryTimeInSeconds = 0,
+                            Url = "https://www.bestbuy.com/site/evga-geforce-rtx-3080-xc3-ultra-gaming-10gb-gddr6-pci-express-4-0-graphics-card/6432400.p?skuId=6432400",
+                            XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[7]/div[1]/div/div/div/button",
+                            XPathContentFailureString = "Sold Out"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            BitlyShortenedUrl = "https://amzn.to/348mpD0",
+                            CronExpression = "* * * * *",
+                            Enabled = true,
+                            LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amazon: AMD 5600x",
+                            QueryTimeInSeconds = 0,
+                            Url = "https://www.amazon.com/gp/product/B08166SLDF/ref=ppx_od_dt_b_asin_title_s00?ie=UTF8&psc=12",
+                            XPath = "//*[@id=\"outOfStock\"]/div/div[1]/span",
+                            XPathContentFailureString = "Currently unavailable."
                         });
                 });
 
@@ -375,6 +442,21 @@ namespace Webscan.Scheduler.Migrations
                         },
                         new
                         {
+                            StatusCheckId = 19,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            StatusCheckId = 20,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            StatusCheckId = 21,
+                            UserId = 1
+                        },
+                        new
+                        {
                             StatusCheckId = 1,
                             UserId = 2
                         },
@@ -461,6 +543,21 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             StatusCheckId = 18,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            StatusCheckId = 19,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            StatusCheckId = 20,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            StatusCheckId = 21,
                             UserId = 2
                         });
                 });
