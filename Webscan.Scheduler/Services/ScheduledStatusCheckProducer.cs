@@ -86,6 +86,7 @@ namespace Webscan.Scheduler.Services
 
                 using (var p = new ProducerBuilder<Null, string>(conf).Build())
                 {
+                    _statusCheck.TimeScheduled = DateTime.Now; 
                     var response = await p.ProduceAsync(kafkaSettings.Value.SchedulerTopicName, new Message<Null, string> { Value = JsonConvert.SerializeObject(_statusCheck, Formatting.Indented) })
                         .ContinueWith(task => task.IsFaulted
                                 ? $"error producing message: {task.Exception.Message}"

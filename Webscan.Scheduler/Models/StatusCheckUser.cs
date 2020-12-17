@@ -8,5 +8,6 @@ namespace Webscan.Scheduler.Models
     {
         public int StatusCheckId { get; set; }
         public int UserId { get; set; }
+        public bool Enabled { get; set; }
     }
 }

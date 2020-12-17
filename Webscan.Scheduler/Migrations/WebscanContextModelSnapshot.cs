@@ -17,7 +17,7 @@ namespace Webscan.Scheduler.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("Webscan.Scheduler.Models.StatusCheck", b =>
                 {
@@ -44,6 +44,9 @@ namespace Webscan.Scheduler.Migrations
                     b.Property<int>("QueryTimeInSeconds")
                         .HasColumnType("int");
 
+                    b.Property<bool>("RenderingJavasciptRequired")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,10 +66,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 1,
                             BitlyShortenedUrl = "https://bit.ly/3mcVrRa",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: EVGA 3080 FTW3",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/evga-geforce-rtx-3080-10g-p5-3897-kr/p/N82E16814487518?Description=3080%20ftw&cm_re=3080_ftw-_-14-487-518-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -80,6 +84,7 @@ namespace Webscan.Scheduler.Migrations
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: AMD 5900x",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = true,
                             Url = "https://www.bestbuy.com/site/amd-ryzen-9-5900x-4th-gen-12-core-24-threads-unlocked-desktop-processor-without-cooler/6438942.p?skuId=6438942",
                             XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[6]/div[1]/div/div/div/button",
                             XPathContentFailureString = "Sold Out"
@@ -93,6 +98,7 @@ namespace Webscan.Scheduler.Migrations
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: AMD 5600x",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = true,
                             Url = "https://www.bestbuy.com/site/amd-ryzen-5-5600x-4th-gen-6-core-12-threads-unlocked-desktop-processor-with-wraith-stealth-cooler/6438943.p?skuId=6438943",
                             XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[6]/div[1]/div/div/div/button",
                             XPathContentFailureString = "Sold Out"
@@ -102,10 +108,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 4,
                             BitlyShortenedUrl = "https://bit.ly/3njzaCC",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: EVGA 3080 XC3",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/evga-geforce-rtx-3080-10g-p5-3885-kr/p/N82E16814487520?Description=3080&cm_re=3080-_-14-487-520-_-Product&quicklink=true",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -115,10 +122,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 5,
                             BitlyShortenedUrl = "https://bit.ly/37g0awU",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: Asus 3080 TUF",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452?Description=3080&cm_re=3080-_-14-126-452-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -128,10 +136,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 6,
                             BitlyShortenedUrl = "https://bit.ly/3r0o9bF",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: Gigabyte 3080 Auros",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/gigabyte-geforce-rtx-3080-gv-n3080vision-oc-10gd/p/N82E16814932337?Description=3080&cm_re=3080-_-14-932-337-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -141,10 +150,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 7,
                             BitlyShortenedUrl = "https://bit.ly/2KiQU2n",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: PNY 3080",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/pny-geforce-rtx-3080-vcg308010tfxmpb/p/N82E16814133810?Description=3080&cm_re=3080-_-14-133-810-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Out of Stock "
@@ -154,10 +164,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 8,
                             BitlyShortenedUrl = "https://bit.ly/383V3iV",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: ASUS ROG 3080 Strix",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/asus-geforce-rtx-3080-rog-strix-rtx3080-o10g-gaming/p/N82E16814126457?Description=3080&cm_re=3080-_-14-126-457-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -167,10 +178,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 9,
                             BitlyShortenedUrl = "https://bit.ly/2W9eelw",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: AMD 5900x CPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/amd-ryzen-9-5900x/p/N82E16819113664?Description=5900x&cm_re=5900x-_-19-113-664-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -180,10 +192,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 10,
                             BitlyShortenedUrl = "https://bit.ly/2KiKLmO",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "NewEgg: AMD 5600x CPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.newegg.com/amd-ryzen-5-5600x/p/N82E16819113666?Description=5600x&cm_re=5600x-_-19-113-666-_-Product",
                             XPath = "//*[@id=\"ProductBuy\"]/div/div/span",
                             XPathContentFailureString = "Sold Out"
@@ -193,10 +206,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 11,
                             BitlyShortenedUrl = "https://bhpho.to/3oNIbnM",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5900x CPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bhphotovideo.com/c/product/1598373-REG/amd_100_100000061wof_ryzen_9_5900x_3_7.html",
                             XPath = "//*[@id=\"bh-app\"]/section/div/div[2]/div[4]/div/div[2]/div/div/div[6]/div[1]/div[1]/div/button",
                             XPathContentFailureString = "Notify When Available"
@@ -206,10 +220,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 12,
                             BitlyShortenedUrl = "https://bhpho.to/3gGKvtT",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5600x CPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bhphotovideo.com/c/product/1598377-REG/amd_100_100000065box_ryzen_5_5600x_3_7.html",
                             XPath = "//*[@id=\"bh-app\"]/section/div/div[2]/div[4]/div/div[2]/div/div/div[6]/div[1]/div[1]/div/button",
                             XPathContentFailureString = "Notify When Available"
@@ -219,10 +234,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 13,
                             BitlyShortenedUrl = "https://bhpho.to/2KiKRuG",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: AMD 5800x CPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bhphotovideo.com/c/product/1598376-REG/amd_100_100000063wof_ryzen_7_5800x_3_8.html",
                             XPath = "//*[@id=\"bh-app\"]/section/div/div[2]/div[4]/div/div[2]/div/div/div[6]/div[1]/div[1]/div/button",
                             XPathContentFailureString = "Notify When Available"
@@ -232,10 +248,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 14,
                             BitlyShortenedUrl = "https://bhpho.to/346hDpW",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "B&H: ASUS 3070 GPU",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bhphotovideo.com/c/product/1602755-REG/asus_dualrtx30708g_geforce_rtx_3070_8g.html",
                             XPath = "//*[@id=\"bh-app\"]/section/div/div[2]/div[4]/div/div[2]/div/div/div[6]/div[1]/div[1]/div/button",
                             XPathContentFailureString = "Notify When Available"
@@ -245,10 +262,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 15,
                             BitlyShortenedUrl = "https://bit.ly/3oLKnvU",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3080 FTW",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.microcenter.com/product/628346/evga-geforce-rtx-3080-ftw3-ultra-gaming-triple-fan-10gb-gddr6x-pcie-40-graphics-card?storeid=045",
                             XPath = "//*[@id=\"pnlInventory\"]/p/span",
                             XPathContentFailureString = "Sold Out"
@@ -258,10 +276,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 16,
                             BitlyShortenedUrl = "https://bit.ly/3r0orPN",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: ASUS TUF 3080",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.microcenter.com/product/628318/asus-geforce-rtx-3080-tuf-gaming-overclocked-triple-fan-10gb-gddr6x-pcie-40-graphics-card?storeid=045",
                             XPath = "//*[@id=\"pnlInventory\"]/p/span",
                             XPathContentFailureString = "Sold Out"
@@ -271,10 +290,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 17,
                             BitlyShortenedUrl = "https://bit.ly/3qURSCL",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3070 XC3",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.microcenter.com/product/630578/evga-geforce-rtx-3070-xc3-ultra-gaming-triple-fan-8gb-gddr6-pcie-40-graphics-card?storeid=045",
                             XPath = "//*[@id=\"pnlInventory\"]/p/span",
                             XPathContentFailureString = "Sold Out"
@@ -282,12 +302,13 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             Id = 18,
-                            BitlyShortenedUrl = "",
+                            BitlyShortenedUrl = "https://bit.ly/2Kx8EHc",
                             CronExpression = "* * * * *",
-                            Enabled = false,
+                            Enabled = true,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "AMD.com: 5000 Series Processors",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = true,
                             Url = "https://www.amd.com/en/where-to-buy/ryzen-5000-series-processors",
                             XPath = "/html/body/div[1]/main/div/div/div/article/div/div[1]/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div/p/a",
                             XPathContentFailureString = "AMD.com - Out of Stock"
@@ -297,10 +318,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 19,
                             BitlyShortenedUrl = "https://bit.ly/3oOW8lm",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: 3080 FTW3",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bestbuy.com/site/evga-geforce-rtx-3080-ftw3-ultra-gaming-10gb-gddr6-pci-express-4-0-graphics-card/6436196.p?skuId=6436196",
                             XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[6]/div[1]/div/div/div/button",
                             XPathContentFailureString = "Sold Out"
@@ -310,10 +332,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 20,
                             BitlyShortenedUrl = "https://bit.ly/34abicR",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BestBuy: 3080 XC3",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.bestbuy.com/site/evga-geforce-rtx-3080-xc3-ultra-gaming-10gb-gddr6-pci-express-4-0-graphics-card/6432400.p?skuId=6432400",
                             XPath = "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[7]/div[1]/div/div/div/button",
                             XPathContentFailureString = "Sold Out"
@@ -323,10 +346,11 @@ namespace Webscan.Scheduler.Migrations
                             Id = 21,
                             BitlyShortenedUrl = "https://amzn.to/348mpD0",
                             CronExpression = "* * * * *",
-                            Enabled = true,
+                            Enabled = false,
                             LastNotified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Amazon: AMD 5600x",
                             QueryTimeInSeconds = 0,
+                            RenderingJavasciptRequired = false,
                             Url = "https://www.amazon.com/gp/product/B08166SLDF/ref=ppx_od_dt_b_asin_title_s00?ie=UTF8&psc=12",
                             XPath = "//*[@id=\"outOfStock\"]/div/div[1]/span",
                             XPathContentFailureString = "Currently unavailable."
@@ -341,6 +365,9 @@ namespace Webscan.Scheduler.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.HasKey("StatusCheckId", "UserId");
 
                     b.HasIndex("UserId");
@@ -351,212 +378,254 @@ namespace Webscan.Scheduler.Migrations
                         new
                         {
                             StatusCheckId = 1,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 2,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 3,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 4,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 5,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 6,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 7,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 8,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 9,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 10,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 11,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 12,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 13,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 14,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 15,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 16,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 17,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 18,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 19,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 20,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 21,
-                            UserId = 1
+                            UserId = 1,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 1,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 2,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 3,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 4,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 5,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 6,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 7,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 8,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 9,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 10,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 11,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 12,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 13,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 14,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 15,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 16,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 17,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 18,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 19,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 20,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         },
                         new
                         {
                             StatusCheckId = 21,
-                            UserId = 2
+                            UserId = 2,
+                            Enabled = true
                         });
                 });
 
