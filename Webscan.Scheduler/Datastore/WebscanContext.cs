@@ -43,7 +43,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: EVGA 3080 FTW3",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 2,
@@ -82,7 +82,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: EVGA 3080 XC3",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 5,
@@ -95,7 +95,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: Asus 3080 TUF",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 6,
@@ -108,7 +108,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: Gigabyte 3080 Auros",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 7,
@@ -121,7 +121,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: PNY 3080",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 8,
@@ -134,7 +134,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: ASUS ROG 3080 Strix",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 9,
@@ -147,7 +147,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: AMD 5900x CPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 10,
@@ -160,7 +160,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "NewEgg: AMD 5600x CPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 11,
@@ -173,7 +173,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "B&H: AMD 5900x CPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 12,
@@ -186,11 +186,11 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "B&H: AMD 5600x CPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 13,
-                                    XPath = "//*[@id=\"bh-app\"]/section/div/div[2]/div[4]/div/div[2]/div/div/div[6]/div[1]/div[1]/div/button",
+                                    XPath = "/html/body/div[1]/main/section/div/div[2]/div[4]/div/div[2]/div/div/div[5]/div[1]/div[1]/div/button",
                                     XPathContentFailureString = "Notify When Available",
                                     Url = "https://www.bhphotovideo.com/c/product/1598376-REG/amd_100_100000063wof_ryzen_7_5800x_3_8.html",
                                     RenderingJavasciptRequired = false,
@@ -199,7 +199,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "B&H: AMD 5800x CPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 14,
@@ -212,7 +212,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "B&H: ASUS 3070 GPU",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 15,
@@ -225,7 +225,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3080 FTW",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 16,
@@ -238,7 +238,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "Microcenter Instore ONLY St. Louis Park: ASUS TUF 3080",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 17,
@@ -251,7 +251,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "Microcenter Instore ONLY St. Louis Park: EVGA 3070 XC3",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 18,
@@ -277,7 +277,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "BestBuy: 3080 FTW3",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 20,
@@ -290,7 +290,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "BestBuy: 3080 XC3",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 },
                                 new StatusCheck() {
                                     Id = 21,
@@ -303,7 +303,7 @@ namespace Webscan.Scheduler.datastore
                                     QueryTimeInSeconds = 0,
                                     Name = "Amazon: AMD 5600x",
                                     LastNotified = new DateTime(),
-                                    Enabled = false
+                                    Enabled = true
                                 }
 
                             }); ;
